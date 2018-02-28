@@ -1,5 +1,7 @@
 #!/bin/sh
 
+##Note - Despite that the script works, it is not finished yet and is still in an experimental state.
+
 #Title description
 ##Unofficial Qubes Maintenance Updater (uQMU).
 
@@ -51,7 +53,7 @@
 ##This warning meesage can be disabled with a #. It includes essential warning for new users
 ##not aware of the pitfalls of scripts. Its highly recommended that new users study how the
 ##script works, it's not very complicated, but also not straight simple either.
-zenity --width="420" --height="200" --title="Welcome to UQU!" --info --text='This script allows you to easily keep Qubes 4 in a good state with proper maintenance.\n\n\- Warning! Please read the comments inside the script carefully before running this script.\n\n- The script is out-of-the-box safety locked, you need to edit the "#" to enable features. Quick Backup and Reboot prompt are by default enabled, as you will notice when you click "ok" below. Please decline the next two prompts, and then edit the script for your needs.\n\n Please do not use Quick Backup before you manually adjusted it to your needs inside the script.'
+zenity --width="420" --height="200" --title="Welcome to uQMU!" --info --text='This script allows you to easily keep Qubes 4 in a good state with proper maintenance.\n\n\- Warning! Please read the comments inside the script carefully before running this script.\n\n- The script is out-of-the-box safety locked, you need to edit the "#" to enable features. Quick Backup and Reboot prompt are by default enabled, as you will notice when you click "ok" below. Please decline the next two prompts, and then edit the script for your needs.\n\n Please do not use Quick Backup before you manually adjusted it to your needs inside the script.'
 wait
 
 #Quick Backup Redundancy
@@ -62,9 +64,9 @@ wait
 ##only exclude system dom0 & default templates. However a proper path/src-VM is still required.
 ##Remember to put the backup externally, so that you can access it if the system does not boot.
 ##Partial credit for this section rhss6-2011 @ https://ubuntuforums.org/showthread.php?t=2239195
-ans=$(zenity --width="420" --height="200" --title="UQU - Quick Backup." --question --text='Do you want to perform a quick backup of your pre-selected AppVMs?' --ok-label="Yes" --cancel-label="No"
+ans=$(zenity --width="420" --height="200" --title="uQMU - Quick Backup." --question --text='Do you want to perform a quick backup of your pre-selected AppVMs?' --ok-label="Yes" --cancel-label="No"
 if [ $? = 0 ] ; then
-command=$(xterm -geometry 100x45+500+250 -background black -foreground green -e qvm-backup -d Browse '/home/user/' -x fedora-26 -x fedora-26-apps -x debian-9 -x whonix-ws -x whonix-gw -x sys-net -x sys-firewall -x sys-usb -x sys-whonix -x fedora-26-dvm -x fedora-25-dvm -x whonix-ws-dvm -x anon-whonix -x debian-9-chat -x fedora-26-minimal -x Win7)
+command=$(xterm -geometry 100x45+500+250 -background black -foreground white -e qvm-backup -d src-AppVM '/home/user/' -x fedora-26 -x debian-9 -x whonix-ws -x whonix-gw -x sys-net -x sys-firewall -x sys-usb -x sys-whonix -x fedora-26-dvm -x whonix-ws-dvm -x anon-whonix -x fedora-26-minimal
 else
 command=$()
 fi
